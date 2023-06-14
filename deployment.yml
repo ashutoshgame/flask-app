@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: koko-flask-app-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: koko-flask-app
+  template:
+    metadata:
+      labels:
+        app: koko-flask-app
+    spec:
+      containers:
+        - name: koko-flask-app
+          image: your-docker-image
+          ports:
+            - containerPort: 5000
