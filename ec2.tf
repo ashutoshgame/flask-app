@@ -1,11 +1,11 @@
 provider "aws" {
-  region = "<AWS_REGION>"
+  region = "ap-south-1"
 }
 
 resource "aws_instance" "example" {
-  ami           = "<AMI_ID>"
-  instance_type = "<INSTANCE_TYPE>"
-  key_name      = "<KEY_PAIR_NAME>"
+  ami           = "ami-08e5424edfe926b43"
+  instance_type = "t2.medium"
+  key_name      = "koko.pem"
   tags = {
     Name = "Jenkins-EC2-Instance"
   }
@@ -19,9 +19,9 @@ resource "aws_instance" "example" {
     sudo systemctl enable docker
 
     # Retrieve the Docker image
-    sudo docker pull your-docker-image
+    sudo docker pull jenkins/jenkins
 
-    # Deploy the Kubernetes manifest
-    sudo kubectl apply -f /deployment.yaml
+    # Start Jenkins
+    docker run -d -p 8080:8080 -p 50000:50000 --name jenkins jenkins/jenkins
   EOF
 }
