@@ -6,5 +6,9 @@ app = Flask(__name__)
 def hello():
     return "Hello, world!"
 
+@app.route('/test')
+def testPath():
+    return "Hello, Ashutosh"
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
