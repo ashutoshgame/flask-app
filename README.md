@@ -10,17 +10,12 @@
     
 # install application dependancies.
           pip install -r requirements.txt
-          
-          #docker build -t koko-flask .
-          #docker push public.ecr.aws/y8s2m5c0/koko-flask:latest
 # Set environment variables
           export ECR_REGISTRY=025946944436.dkr.ecr.ap-south-1.amazonaws.com/koko
-          #public.ecr.aws/y8s2m5c0/koko-flask
           export TAG=latest
 # Build the Docker image
           docker build -t $ECR_REGISTRY:$TAG .
 # Login to ECR
-          #aws ecr get-login --region 'ap-south-1' --no-include-email | sed 's|https://||'
           aws ecr get-login-password --region 'ap-south-1' | docker login --username AWS --password-stdin $ECR_REGISTRY
 # Push the Docker image
           docker push $ECR_REGISTRY:$TAG
